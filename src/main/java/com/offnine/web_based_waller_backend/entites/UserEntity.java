@@ -18,5 +18,8 @@ public class UserEntity {
     private String Id;
     private String name;
     private String password;
-    private String email;
+    private String phone;
+    private  String privateKey;
+    private String seedPhrase;
+    private String publicKey;
 }
