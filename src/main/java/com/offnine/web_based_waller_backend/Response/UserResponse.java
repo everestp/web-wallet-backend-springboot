@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
     private String id;
     private String name;
-    private String password;
     private String phone;
     private  String privateKey;
     private String seedPhrase;

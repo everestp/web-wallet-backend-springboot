@@ -36,9 +36,14 @@ public class UserServiceImpl implements UserService {
 
     private UserEntity convertToUserEntity(UserRequest userRequest) {
         return UserEntity.builder()
-                .phone(userRequest.getP())
+                .phone(userRequest.getPhone())
                 .name(userRequest.getName())
+                .seedPhrase(userRequest.getSeedPhrase())
+                .privateKey(userRequest.getPrivateKey())
+                .publicKey(userRequest.getPublicKey())
                 .password(passwordEncoder.encode(userRequest.getPassword())).build();
+
+
 
     }
 
@@ -46,7 +51,11 @@ public class UserServiceImpl implements UserService {
         return UserResponse.builder()
                 .id(registered.getId())
                 .name(registered.getName())
-                .email(registered.getEmail())
+                .phone(registered.getPhone())
+                .seedPhrase(registered.getSeedPhrase())
+                .privateKey(registered.getPrivateKey())
+                .publicKey(registered.getPublicKey())
+
                 .build();
     }
 }

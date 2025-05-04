@@ -1,5 +1,6 @@
 package com.offnine.web_based_waller_backend.entites;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class UserEntity {
     private String Id;
     private String name;
     private String password;
+    @Column(nullable = false, unique = true)
     private String phone;
     private  String privateKey;
     private String seedPhrase;
