@@ -3,6 +3,8 @@ package com.offnine.web_based_waller_backend.config;
 
 
 
+
+import com.offnine.web_based_waller_backend.filter.JwtAuthenticationFilter;
 import com.offnine.web_based_waller_backend.service.impl.AppUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
