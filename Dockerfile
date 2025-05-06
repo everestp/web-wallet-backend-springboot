@@ -8,7 +8,7 @@ RUN mvn clean package -DskipTests
 # Stage 2: Run the application with Java 21
 FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/web-based-walller-backend-0.0.1-SNAPSHOT.jar web-based-waller-backend.jar
+COPY --from=build /app/target/web-based-waller-backend-0.0.1-SNAPSHOT.jar web-based-waller-backend.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "web-based-waller-backend.jar"]
