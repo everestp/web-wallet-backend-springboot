@@ -16,6 +16,7 @@ public class UserRequest {
     private  String privateKey;
     private String seedPhrase;
     private String publicKey;
+    private String address;
 
 
 

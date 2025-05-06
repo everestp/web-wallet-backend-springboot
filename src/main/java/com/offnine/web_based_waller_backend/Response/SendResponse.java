@@ -9,14 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserResponse {
-    private String id;
+public class SendResponse {
     private String name;
-    private String phone;
-    private  String privateKey;
-    private String seedPhrase;
-    private String publicKey;
-    private String address;
-
-
+   private String publicKey;
+   private  String remark;
+   private String phone;
 }

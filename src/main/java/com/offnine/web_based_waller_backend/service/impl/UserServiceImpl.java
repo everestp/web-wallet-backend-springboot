@@ -3,7 +3,9 @@ package com.offnine.web_based_waller_backend.service.impl;
 
 
 import com.offnine.web_based_waller_backend.Repo.UserRepo;
+import com.offnine.web_based_waller_backend.Request.SendRequest;
 import com.offnine.web_based_waller_backend.Request.UserRequest;
+import com.offnine.web_based_waller_backend.Response.SendResponse;
 import com.offnine.web_based_waller_backend.Response.UserResponse;
 import com.offnine.web_based_waller_backend.entites.UserEntity;
 import com.offnine.web_based_waller_backend.service.AuthenticationFacade;
@@ -34,6 +36,24 @@ public class UserServiceImpl implements UserService {
         return  loggedInUser.getId();
     }
 
+    @Override
+    public UserResponse logginUser() {
+        String logggedInPhone = authenticationFacade.getAuthentication().getName();
+        UserEntity loggedInUser =  userRepo.findByPhone(logggedInPhone).orElseThrow(()->new UsernameNotFoundException("User Not Found"));
+        return convertToUserResponse(loggedInUser);
+    }
+
+    @Override
+    public SendResponse sendTransaction(SendRequest request) {
+         UserEntity userEntity =  userRepo.findByPhone(request.getPhone()).orElseThrow(()->new UsernameNotFoundException("User Not Found"));
+         SendResponse sendResponse = new SendResponse();
+         sendResponse.setRemark(request.getRemark());
+         sendResponse.setPublicKey(userEntity.getPublicKey());
+         sendResponse.setPhone(request.getPhone());
+         sendResponse.setName(userEntity.getName());
+         return sendResponse;
+    }
+
     private UserEntity convertToUserEntity(UserRequest userRequest) {
         return UserEntity.builder()
                 .phone(userRequest.getPhone())
@@ -41,6 +61,7 @@ public class UserServiceImpl implements UserService {
                 .seedPhrase(userRequest.getSeedPhrase())
                 .privateKey(userRequest.getPrivateKey())
                 .publicKey(userRequest.getPublicKey())
+                .address(userRequest.getAddress())
                 .password(passwordEncoder.encode(userRequest.getPassword())).build();
 
 
@@ -55,7 +76,10 @@ public class UserServiceImpl implements UserService {
                 .seedPhrase(registered.getSeedPhrase())
                 .privateKey(registered.getPrivateKey())
                 .publicKey(registered.getPublicKey())
+                .address(registered.getAddress())
 
                 .build();
     }
+
+
 }
